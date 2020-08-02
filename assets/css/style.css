@@ -1020,7 +1020,7 @@ section {
 }
 
 #portfolio .portfolio-item figure .link-details {
-  right: calc(50% - 38px);
+  right: calc(40% - 38px);
   top: calc(50% - 18px);
 }
 
@@ -1031,7 +1031,7 @@ section {
 
 #portfolio .portfolio-item figure:hover .link-details {
   opacity: 1;
-  right: calc(50% - 44px);
+  right: calc(55% - 44px);
 }
 
 #portfolio .portfolio-item .portfolio-info {
