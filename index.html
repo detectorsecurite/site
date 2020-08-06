@@ -380,17 +380,31 @@
           <div method="post" role="form" class="php-email-form" id="devis">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Nom de votre compagnie" data-rule="minlen:1" data-msg="Entrez votre nom" />
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nom de votre compagnie"/>
                 <div class="validate" id="error-name">Veuillez entrer votre nom</div>
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" id="from" name="email" type="email" placeholder="Votre email" data-rule="email" data-msg="Entrez votre email" />
+                <input type="email" class="form-control" id="from" name="email" type="email" placeholder="Votre email" />
                 <div class="validate" id="error-mail">Veuillez entrer votre email</div>
               </div>
             </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="number" name="agent" class="form-control" id="agent" placeholder="Nombre d'agents souhaité"/>
+                <div class="validate" id="error-agent">Veuillez entrer le nombre d'agents souhaité</div>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="adress" name="adress" placeholder="Adresse de la préstation" />
+                <div class="validate" id="error-adress">Veuillez entrer l'adresse de la préstation</div>
+              </div>
+            </div>
             <div class="form-group">
-              <textarea class="form-control" id="message" name="message" rows="5" data-rule="required" data-msg="Entrez votre message" placeholder="Message"></textarea>
-              <div class="validate" id="error-message">Veuillez entrer votre message</div>
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="Numéro de téléphone" />
+              <div class="validate" id="error-phone">Veuillez entrer votre numéro de téléphone</div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" id="message" name="message" rows="5" placeholder="Sujet de votre demande"></textarea>
+              <div class="validate" id="error-message">Veuillez entrer le sujet de votre demande</div>
             </div>
             <div class="mb-3">
               <div class="loading">Loading</div>
@@ -442,17 +456,25 @@
     let from = document.querySelector('#from').value;
     let userName = document.querySelector('#name').value;
     let message = document.querySelector('#message').value;
+    let agent = document.querySelector('#agent').value;
+    let adress = document.querySelector('#adress').value;
+    let phone = document.querySelector('#phone').value;
 
     // Error messages
     let nameError = document.querySelector('#error-name');
     let mailError = document.querySelector('#error-mail');
     let messageError = document.querySelector('#error-message');
+    let agentError = document.querySelector('#error-agent');
+    let adressError = document.querySelector('#error-adress');
+    let phoneError = document.querySelector('#error-phone');
 
+    // Success messages
+    let messageSuccess = document.querySelector('.sent-message');
 
     var templateParams = {
       to_name: 'Detector Sécurité',
-      from_name: userName + ' (' + from + ') ',
-      message_html: message
+      from_name: userName + ' (' + from + ' - ' + phone + ') ',
+      message_html:  "<p><strong> Nombre d'agents: </strong> " + agent + "</br>\n\n</p>" +  "<p><strong>Adresse de la préstation:</strong> " + adress + "</p>\n" + "<p><strong> Numéro de téléphone: </strong> " + phone + "</p>\n" + "<p><strong> Sujet de la demande: </strong></p>" + message
     };
 
     function sendMail () {
@@ -469,6 +491,10 @@
       let from = document.querySelector('#from').value;
       let userName = document.querySelector('#name').value;
       let message = document.querySelector('#message').value;
+      let agent = document.querySelector('#agent').value;
+      let adress = document.querySelector('#adress').value;
+      let phone = document.querySelector('#phone').value;
+
       let error = 0
 
       if (from == '') {
@@ -493,6 +519,29 @@
       }
       
 
+      if ( agent == '') {
+        agentError.classList.add('d-block')
+        error += 1;
+      } else {
+        agentError.classList.remove('d-block')
+      }
+
+      if (adress == '') {
+        adressError.classList.add('d-block')
+        error += 1;
+      } else {
+        adressError.classList.remove('d-block')
+      }
+
+      
+      if (phone == '') {
+        phoneError.classList.add('d-block')
+        error += 1;
+      } else {
+        phoneError.classList.remove('d-block')
+      }
+
+
       if (error > 0) {
         return false
       }
@@ -506,6 +555,11 @@
 
       if (isValide) {
         sendMail();
+        messageSuccess.classList.add('d-block');
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000)
       }
       
     });
