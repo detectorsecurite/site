@@ -1412,6 +1412,18 @@ section {
   }
 }
 
+
+.img-shop {
+  height: 150vh!important;
+}
+
+@media (max-width: 768px) {
+  .img-shop {
+    height: 25vh!important;
+  }
+}
+
+
 #contact .php-email-form {
   box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
   padding: 30px;
