@@ -477,7 +477,7 @@
     };
 
     function sendMail () {
-      emailjs.send('gmail', 'template_tFNnbdF9', templateParams)
+      emailjs.send('zoho', 'template_tFNnbdF9', templateParams)
       .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
       }, function(error) {
