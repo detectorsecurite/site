@@ -470,13 +470,21 @@
     // Success messages
     let messageSuccess = document.querySelector('.sent-message');
 
-    var templateParams = {
-      to_name: 'Detector Sécurité',
-      from_name: userName + ' (' + from + ' - ' + phone + ') ',
-      message_html:  "<p><strong> Nombre d'agents: </strong> " + agent + "</br>\n\n</p>" +  "<p><strong>Adresse de la préstation:</strong> " + adress + "</p>\n" + "<p><strong> Numéro de téléphone: </strong> " + phone + "</p>\n" + "<p><strong> Sujet de la demande: </strong></p>" + message
-    };
-
     function sendMail () {
+      
+      from = document.querySelector('#from').value;
+      userName = document.querySelector('#name').value;
+      message = document.querySelector('#message').value;
+      agent = document.querySelector('#agent').value;
+      adress = document.querySelector('#adress').value;
+      phone = document.querySelector('#phone').value;
+
+      var templateParams = {
+        to_name: 'Detector Sécurité',
+        from_name: userName + ' (' + from + ' - ' + phone + ') ',
+        message_html:  "<p><strong> Nombre d'agents: </strong> " + agent + "</br>\n\n</p>" +  "<p><strong>Adresse de la préstation:</strong> " + adress + "</p>\n" + "<p><strong> Numéro de téléphone: </strong> " + phone + "</p>\n" + "<p><strong> Sujet de la demande: </strong></p>" + message
+      };
+
       emailjs.send('zoho', 'template_tFNnbdF9', templateParams)
       .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
@@ -555,10 +563,6 @@
       if (isValide) {
         sendMail();
         messageSuccess.classList.add('d-block');
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 8000)
       }
       
     });
