@@ -485,7 +485,7 @@
         message_html:  "<p><strong> Nombre d'agents: </strong> " + agent + "</br>\n\n</p>" +  "<p><strong>Adresse de la préstation:</strong> " + adress + "</p>\n" + "<p><strong> Numéro de téléphone: </strong> " + phone + "</p>\n" + "<p><strong> Sujet de la demande: </strong></p>" + message
       };
 
-      emailjs.send('zoho', 'template_tFNnbdF9', templateParams)
+      emailjs.send('gmail', 'template_tFNnbdF9', templateParams)
       .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
       }, function(error) {
